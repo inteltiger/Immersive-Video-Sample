@@ -509,9 +509,6 @@ uint32_t gts_bs_write_data(GTS_BitStream *bs, const int8_t *data, uint32_t nbByt
             }
             memcpy(bs->buffer_io+bs->buffer_written, data, nbBytes);
             bs->buffer_written += nbBytes;
-            if (gts_fwrite(data, nbBytes, 1, bs->stream) != 1) return 0;
-            if (bs->size == bs->position) bs->size += nbBytes;
-            bs->position += nbBytes;
             return nbBytes;
         case  GTS_BITSTREAM_WRITE:
             if (bs->position + nbBytes > bs->size)
