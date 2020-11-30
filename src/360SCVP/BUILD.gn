@@ -1,6 +1,9 @@
 # for owt-client-android. Tested with Android arm64 device only
 
 config("my_config") {
+
+    include_dirs = [ "../../../safestringlib/include" ]
+
     # compare with CMakeLists.txt
     cflags = [
       "-fstack-protector-strong",
@@ -35,5 +38,10 @@ static_library("lib360SCVP") {
       "360SCVPViewPort.cpp",
       "360SCVPViewportImpl.cpp",
     ]
+
+    deps = [
+      "//third_party/safestringlib:libsafestring_shared",
+    ]
+
 }
 
