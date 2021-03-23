@@ -85,11 +85,6 @@ install_tools() {
         ./configure && make -j $(nproc) && sudo make install && cd ..
     fi
 
-    if [ ! -f "./curl-7.66.0.tar.xz" ];then
-        wget https://curl.haxx.se/download/curl-7.66.0.tar.xz
-    fi
-    tar xf curl-7.66.0.tar.xz
-    cd curl-7.66.0 && ./configure --with-darwinssl && make -j $(nproc) && sudo make install
 }
 
 install_dependencies() {
