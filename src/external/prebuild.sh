@@ -50,22 +50,13 @@ install_tools() {
     fi
 
     if [ "${OS}" == \""Ubuntu"\" ];then
-        sudo apt-get install libgmp-dev libmpfr-dev mpc libmpc-dev patch autoconf \
+        sudo apt-get install cmake libgmp-dev libmpfr-dev mpc libmpc-dev patch autoconf \
             libtool automake libssl-dev libevent-dev libcurl4-openssl-dev bc -y
+
     elif [ "${OS}" == \""CentOS Linux"\" ];then
-        sudo yum install gmp gmp-devel mpfr mpfr-devel libmpc libmpc-devel \
+        sudo yum install cmake3 gmp gmp-devel mpfr mpfr-devel libmpc libmpc-devel \
             patch autoconf libtool automake libssl-devel bc \
             libevent-devel.x86_64 openssl-devel libxml2-devel -y
-    fi
-
-    program_exists cmake
-    if [ $? != 0 ];then
-        if [ ! -f "./cmake-3.12.4.tar.gz" ];then
-            wget https://cmake.org/files/v3.12/cmake-3.12.4.tar.gz
-        fi
-        tar xf cmake-3.12.4.tar.gz
-        cd cmake-3.12.4
-        ./bootstrap --prefix=/usr && make -j $(nproc) && sudo make install && cd ..
     fi
 
     mkdir -p ../build/external && cd ../build/external

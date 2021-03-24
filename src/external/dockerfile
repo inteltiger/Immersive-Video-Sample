@@ -14,7 +14,7 @@ RUN yum install -y centos-release-scl-rh && \
     yum install -y wget git bzip2 xz sudo devtoolset-7-gcc* && \
     wget https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-13.noarch.rpm && \
     rpm -Uvh epel-release*rpm && \
-    yum install -y openssl centos-release-scl scl-utils gmp gmp-devel && \
+    yum install -y cmake3 openssl centos-release-scl scl-utils gmp gmp-devel && \
     yum install -y mpfr mpfr-devel libmpc libmpc-devel patch autoconf && \
     yum install -y libtool automake libcurl-devel libxml2-devel && \
     yum install -y libevent-devel.x86_64 openssl-devel bc redhat-lsb && \
@@ -48,17 +48,6 @@ RUN wget -O - ${ZILB_REPO} | tar xz && \
     cd zlib-${ZLIB_VER} && \
     source /opt/rh/devtoolset-7/enable && \
     ./configure && \
-    make -j$(nproc) && \
-    make install && \
-    cd ${WORKDIR} && rm -rf ./*
-
-# Install cmake
-ARG CMAKE_VER=3.12.4
-ARG CMAKE_REPO=https://cmake.org/files
-RUN wget -O - ${CMAKE_REPO}/v${CMAKE_VER%.*}/cmake-${CMAKE_VER}.tar.gz | tar xz && \
-    cd cmake-${CMAKE_VER} && \
-    source /opt/rh/devtoolset-7/enable && \
-    ./bootstrap --prefix="/usr" --system-curl && \
     make -j$(nproc) && \
     make install && \
     cd ${WORKDIR} && rm -rf ./*
